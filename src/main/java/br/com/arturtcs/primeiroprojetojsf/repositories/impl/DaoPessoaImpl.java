@@ -17,7 +17,7 @@ public class DaoPessoaImpl implements InterfaceDaoPessoa{
 		EntityTransaction transaction = em.getTransaction();
 		transaction.begin();
 		
-		pessoa = (Pessoa) em.createQuery("select p from pessoa p where p.login = '" + login + "' and p.senha = '" + senha + "'").getSingleResult();
+		pessoa = (Pessoa) em.createQuery("select p from Pessoa p where p.login = '" + login + "' and p.senha = '" + senha + "'").getSingleResult();
 		
 		transaction.commit();
 		em.close();
