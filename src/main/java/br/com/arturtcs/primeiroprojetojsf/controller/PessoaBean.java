@@ -6,9 +6,13 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 
 import br.com.arturtcs.primeiroprojetojsf.dao.DaoGeneric;
 import br.com.arturtcs.primeiroprojetojsf.entidades.Pessoa;
+import br.com.arturtcs.primeiroprojetojsf.repositories.InterfaceDaoPessoa;
+import br.com.arturtcs.primeiroprojetojsf.repositories.impl.DaoPessoaImpl;
 
 //Controller
 @ManagedBean(name = "pessoaBean")
@@ -17,7 +21,8 @@ public class PessoaBean {
 
 	private Pessoa pessoa = new Pessoa();
 	private DaoGeneric<Pessoa> dao = new DaoGeneric<Pessoa>();
-	List<Pessoa> listaDePessoas = new ArrayList<Pessoa>();
+	private List<Pessoa> listaDePessoas = new ArrayList<Pessoa>();
+	private InterfaceDaoPessoa iDaoPessoa = new DaoPessoaImpl();
 
 	public String salvar() {
 		pessoa = dao.merge(pessoa);
@@ -36,6 +41,20 @@ public class PessoaBean {
 		pessoa = new Pessoa();
 		carregarListaDePessoas();
 		return "";
+	}
+	
+	public String logar() {		
+		Pessoa pessoaUser = iDaoPessoa.consultarUsuario(pessoa.getLogin(), pessoa.getSenha());
+		if(pessoaUser != null) {
+			//adicionar o usuário na sessão usuarioLogado
+			FacesContext context = FacesContext.getCurrentInstance();
+			ExternalContext externalContext = context.getExternalContext();
+			externalContext.getSessionMap().put("usuarioLogado", pessoaUser.getLogin());
+			
+			return "primeirapagina.jsf";
+		}		
+		
+		return "index.jsf";
 	}
 
 	/*

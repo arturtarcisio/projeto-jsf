@@ -1,6 +1,7 @@
 package br.com.arturtcs.primeiroprojetojsf.entidades;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -30,17 +31,32 @@ public class Pessoa implements Serializable {
 
 	private String sexo;
 
+	private String[] frameworks;
+
+	private Boolean ativo;
+
+	private String login;
+
+	private String senha;
+
+	private String perfilUser;
+
 	public Pessoa() {
 	}
 
-	public Pessoa(Long id, String nome, String sobrenome, Integer idade, Date dataNascimento, String sexo) {
-		super();
+	public Pessoa(Long id, String nome, String sobrenome, Integer idade, Date dataNascimento, String sexo,
+			String[] frameworks, Boolean ativo, String login, String senha, String perfilUser) {
 		this.id = id;
 		this.nome = nome;
 		this.sobrenome = sobrenome;
 		this.idade = idade;
 		this.dataNascimento = dataNascimento;
 		this.sexo = sexo;
+		this.frameworks = frameworks;
+		this.ativo = ativo;
+		this.login = login;
+		this.senha = senha;
+		this.perfilUser = perfilUser;
 	}
 
 	public Long getId() {
@@ -91,6 +107,46 @@ public class Pessoa implements Serializable {
 		this.sexo = sexo;
 	}
 
+	public String[] getFrameworks() {
+		return frameworks;
+	}
+
+	public void setFrameworks(String[] frameworks) {
+		this.frameworks = frameworks;
+	}
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
+	}
+
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
+	public String getPerfilUser() {
+		return perfilUser;
+	}
+
+	public void setPerfilUser(String perfilUser) {
+		this.perfilUser = perfilUser;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -119,7 +175,9 @@ public class Pessoa implements Serializable {
 	@Override
 	public String toString() {
 		return "Pessoa [id=" + id + ", nome=" + nome + ", sobrenome=" + sobrenome + ", idade=" + idade
-				+ ", dataNascimento=" + dataNascimento + ", sexo=" + sexo + "]";
+				+ ", dataNascimento=" + dataNascimento + ", sexo=" + sexo + ", frameworks="
+				+ Arrays.toString(frameworks) + ", ativo=" + ativo + ", login=" + login + ", senha=" + senha
+				+ ", perfilUser=" + perfilUser + "]";
 	}
 
 }
