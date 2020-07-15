@@ -9,6 +9,14 @@
 </h:head>
 
 <h:body>
+
+	<h:form>
+		<h:commandLink value="Administração" action="primeirapagina" style="margin-left:1cm;"/>
+		<h:commandLink value="Lançamentos" action="lancamento" style="margin-left:1cm;"/>
+		<h:commandLink value="Logout" action="index" style="margin-left:1cm;"/>
+	</h:form>
+
+
 	<h:form id="formPessoa">
 				
 		<h1>Cadastro de usuário</h1>
@@ -16,8 +24,8 @@
 		<c:facet name="header">
 			<h:outputText value="Cadastro de Usuário"/>
 		</c:facet>
-			<h:outputLabel value="Id: " />
-			<h:inputText value="#{pessoaBean.pessoa.id}" readonly="true" />
+			<h:outputLabel value="Id: " rendered="false"/>
+			<h:inputText value="#{pessoaBean.pessoa.id}" readonly="true" rendered="false"/>
 
 			<h:outputLabel value="Nome: " />
 			<h:inputText value="#{pessoaBean.pessoa.nome}" />
@@ -61,17 +69,25 @@
 				<c:selectItem itemValue="SECRETATIO" itemLabel="Secretario"/>
 				<c:selectItem itemValue="RECEPCIONISTA" itemLabel="Recepcionista"/>
 			</h:selectOneMenu>
+			
+			<h:outputLabel value="Programador"/>
+			<h:selectOneRadio value="#{pessoaBean.pessoa.nivelProgramador}" layout="pageDirection">
+				<c:selectItem itemValue="JUNIOR" itemLabel="Junior"/>
+				<c:selectItem itemValue="PLENO" itemLabel="Pleno"/>
+				<c:selectItem itemValue="SENIOR" itemLabel="Senior"/>
+				<c:selectItem itemValue="ESPECIALISTA" itemLabel="Especialista"/>
+			</h:selectOneRadio>
 				
 		<h:outputLabel/>
 		<h:panelGroup>
 			<h:commandButton value="Novo" action="#{pessoaBean.novo}" image="/resources/img/novo.png"
 			style="height: 50px; width:50px;" title="Novo"/>
 			<h:commandButton value="Salvar" action="#{pessoaBean.salvar}" image="/resources/img/salvar.png"
-			style="height: 50px; width:50px;" title="Salvar"/>
+			style="height: 50px; width:50px; margin-left:1cm;" title="Salvar"/>
 			<h:commandButton value="Apagar" action="#{pessoaBean.remove}" image="/resources/img/deletar.png"
-			style="height: 50px; width:50px;" title="Apagar"/>
+			style="height: 50px; width:50px; margin-left:1cm;" title="Apagar" rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}"/>
 			<h:commandButton value="Limpar" type="reset" image="/resources/img/limpar.png"
-			style="height: 50px; width:50px;" title="Limpar"/>
+			style="height: 50px; width:50px; margin-left:1cm;" title="Limpar"/>
 		</h:panelGroup>
 		
 		</h:panelGrid>
@@ -99,15 +115,15 @@
 				<h:outputText value="#{pessoa.sexo}"/>
 			</h:column>
 			<h:column>
-				<c:facet name="header">Editar: </c:facet>
-				<h:commandLink>
+				<c:facet name="header">Editar</c:facet>
+				<h:commandLink title="Editar">
 					<c:setPropertyActionListener value="#{pessoa}" target="#{pessoaBean.pessoa}" />
 					<h:graphicImage height="30" width="70" library="img" name="editar.png" title="Editar"/>
 				</h:commandLink>
 			</h:column>
 			
-			<h:column>
-			<c:facet name="header">Excluir:</c:facet>
+			<h:column rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}">
+			<c:facet name="header">Excluir</c:facet>
 				<h:commandLink action="#{pessoaBean.remove}">
 					<c:setPropertyActionListener value="#{pessoa}" target="#{pessoaBean.pessoa}" />
 					<h:graphicImage height="30" width="40" library="img" name="excluir.png" title="Excluir"/>
