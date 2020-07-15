@@ -30,8 +30,8 @@
 			<h:inputText value="#{pessoaBean.pessoa.nome}" 
 			required="true" 
 			requiredMessage="Informe nome do usuário"			
-			validatorMessage="Nome tem que ter no mínimo 10 letras">
-				<c:validateLength minimum="10" maximum="50"/>
+			validatorMessage="Nome tem que ter no mínimo 3 letras">
+				<c:validateLength minimum="3" maximum="50"/>
 			</h:inputText>
 
 			<h:outputLabel value="Sobrenome: " />
@@ -40,6 +40,15 @@
 			<h:outputLabel value="Idade: " />
 			<h:inputText value="#{pessoaBean.pessoa.idade}" />
 			
+			<h:outputLabel value="Cpf:"/>
+			<h:inputText value="#{pessoaBean.pessoa.cpf}" required="true" requiredMessage="CPF invalido"
+				validatorMessage="CPF deve conter 11 numeros">
+				<c:validateLength maximum="11"/>				
+			</h:inputText>
+			
+			<h:outputLabel value="Titulo de eleitor:"/>
+			<h:inputText value="#{pessoaBean.pessoa.tituloEleitor}" required="true" requiredMessage="Informe o titulo de eleitor"/>								
+						
 			<h:outputLabel value="Sexo: "/>
 			<h:selectOneMenu id="campoSexo" value="#{pessoaBean.pessoa.sexo}">
 				<c:selectItem itemLabel="[--Selecione--]" noSelectionOption="true"/>
@@ -99,18 +108,25 @@
 				
 		<h:outputLabel/>
 		<h:panelGroup>
-			<h:commandButton value="Novo" action="#{pessoaBean.novo}" image="/resources/img/novo.png"
-			style="height: 50px; width:50px;" title="Novo"/>
+			<h:commandButton value="Novo" id="botaoNovo" action="#{pessoaBean.novo}" image="/resources/img/novo.png"
+			style="height: 50px; width:50px;" title="Novo">
+				<c:ajax execute="botaoNovo" render="@form"/>			
+			</h:commandButton>
 			<h:commandButton value="Salvar" action="#{pessoaBean.salvar}" image="/resources/img/salvar.png"
 			style="height: 50px; width:50px; margin-left:1cm;" title="Salvar"/>
 			<h:commandButton value="Apagar" action="#{pessoaBean.remove}" image="/resources/img/deletar.png"
 			style="height: 50px; width:50px; margin-left:1cm;" title="Apagar" rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}"/>
-			<h:commandButton value="Limpar" type="reset" image="/resources/img/limpar.png"
-			style="height: 50px; width:50px; margin-left:1cm;" title="Limpar"/>
+			<h:commandButton value="Limpar" id="botaoLimpar" action="#{pessoaBean.limpar}" image="/resources/img/limpar.png"
+			style="height: 50px; width:50px; margin-left:1cm;" title="Limpar">
+				<c:ajax execute="botaoLimpar" render="@form"/>
+			</h:commandButton>
 		</h:panelGroup>
 		
 		</h:panelGrid>
 
+		</h:form>
+		
+		<h:form id="formTabela">
 		<h:dataTable value="#{pessoaBean.listaDePessoas}" var="pessoa" border="1" cellpadding="4">
 			<c:facet name="header"> Lista de usuários cadastrados </c:facet>
 			<h:column>
@@ -150,9 +166,8 @@
 			</h:column>
 			
 		</h:dataTable>
-
-
-	</h:form>
+		</h:form>
+	
 </h:body>
 
 
