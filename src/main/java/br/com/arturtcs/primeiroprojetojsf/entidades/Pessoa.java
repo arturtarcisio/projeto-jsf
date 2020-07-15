@@ -43,12 +43,14 @@ public class Pessoa implements Serializable {
 
 	private String nivelProgramador;
 
+	private Integer[] linguagens;
+
 	public Pessoa() {
 	}
 
 	public Pessoa(Long id, String nome, String sobrenome, Integer idade, Date dataNascimento, String sexo,
-			String[] frameworks, Boolean ativo, String login, String senha, String perfilUser,
-			String nivelProgramador) {
+			String[] frameworks, Boolean ativo, String login, String senha, String perfilUser, String nivelProgramador,
+			Integer[] linguagens) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -62,6 +64,7 @@ public class Pessoa implements Serializable {
 		this.senha = senha;
 		this.perfilUser = perfilUser;
 		this.nivelProgramador = nivelProgramador;
+		this.linguagens = linguagens;
 	}
 
 	public Long getId() {
@@ -160,6 +163,14 @@ public class Pessoa implements Serializable {
 		this.nivelProgramador = nivelProgramador;
 	}
 
+	public Integer[] getLinguagens() {
+		return linguagens;
+	}
+
+	public void setLinguagens(Integer[] linguagens) {
+		this.linguagens = linguagens;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -190,7 +201,8 @@ public class Pessoa implements Serializable {
 		return "Pessoa [id=" + id + ", nome=" + nome + ", sobrenome=" + sobrenome + ", idade=" + idade
 				+ ", dataNascimento=" + dataNascimento + ", sexo=" + sexo + ", frameworks="
 				+ Arrays.toString(frameworks) + ", ativo=" + ativo + ", login=" + login + ", senha=" + senha
-				+ ", perfilUser=" + perfilUser + ", nivelProgramador=" + nivelProgramador + "]";
+				+ ", perfilUser=" + perfilUser + ", nivelProgramador=" + nivelProgramador + ", linguagens="
+				+ Arrays.toString(linguagens) + "]";
 	}
 
 }
