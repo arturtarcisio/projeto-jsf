@@ -27,7 +27,12 @@
 			<h:inputText value="#{pessoaBean.pessoa.id}" readonly="true" rendered="false"/>
 
 			<h:outputLabel value="Nome: " />
-			<h:inputText value="#{pessoaBean.pessoa.nome}" />
+			<h:inputText value="#{pessoaBean.pessoa.nome}" 
+			required="true" 
+			requiredMessage="Informe nome do usuário"			
+			validatorMessage="Nome tem que ter no mínimo 10 letras">
+				<c:validateLength minimum="10" maximum="50"/>
+			</h:inputText>
 
 			<h:outputLabel value="Sobrenome: " />
 			<h:inputText value="#{pessoaBean.pessoa.sobrenome}" />
