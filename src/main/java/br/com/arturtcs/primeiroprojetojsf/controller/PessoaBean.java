@@ -16,6 +16,8 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 
+import com.google.gson.Gson;
+
 import br.com.arturtcs.primeiroprojetojsf.dao.DaoGeneric;
 import br.com.arturtcs.primeiroprojetojsf.entidades.Pessoa;
 import br.com.arturtcs.primeiroprojetojsf.repositories.InterfaceDaoPessoa;
@@ -92,18 +94,29 @@ public class PessoaBean {
 		try {
 			URL url = new URL("https://viacep.com.br/ws/" + pessoa.getCep() + "/json/"); // monta url
 			URLConnection connection = url.openConnection(); // abre conexao
-			
+
 			InputStream is = connection.getInputStream(); // executa lá do lado do servidor do ws
 			BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
 
 			String cep = "";
 			StringBuilder jsonCep = new StringBuilder();
-			
+
 			while ((cep = br.readLine()) != null) {
 				jsonCep.append(cep);
 			}
 
-			System.out.println(jsonCep);
+			Pessoa gsonAux = new Gson().fromJson(jsonCep.toString(), Pessoa.class);
+			
+			pessoa.setCep(gsonAux.getCep());
+			pessoa.setLogradouro(gsonAux.getLogradouro());
+			pessoa.setComplemento(gsonAux.getComplemento());
+			pessoa.setBairro(gsonAux.getBairro());
+			pessoa.setLocalidade(gsonAux.getLocalidade());
+			pessoa.setUf(gsonAux.getUf());
+			pessoa.setUnidade(gsonAux.getUnidade());
+			pessoa.setIbge(gsonAux.getIbge());
+			pessoa.setGia(gsonAux.getGia());
+
 
 		} catch (Exception e) {
 			e.printStackTrace();
