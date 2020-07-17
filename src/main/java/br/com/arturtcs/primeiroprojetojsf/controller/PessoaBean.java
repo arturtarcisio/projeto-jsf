@@ -9,6 +9,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.faces.event.AjaxBehaviorEvent;
 
 import br.com.arturtcs.primeiroprojetojsf.dao.DaoGeneric;
 import br.com.arturtcs.primeiroprojetojsf.entidades.Pessoa;
@@ -81,6 +82,11 @@ public class PessoaBean {
 		
 		return pessoa.getPerfilUser().equals(acesso);
 	}
+	
+	public void pesquisaCep(AjaxBehaviorEvent event) {
+		System.out.println("Metodo pesquisa cep chamado. CEP: " + pessoa.getCep());
+	}
+	
 
 	/*
 	 * Sempre quando abrir a tela que o managed bean for

@@ -71,6 +71,11 @@
 				<c:selectItem itemValue="Primefaces"/>
 			</h:selectManyMenu>
 			
+			<h:outputLabel value="CEP:"/>
+			<h:inputText value="#{pessoaBean.pessoa.cep}">
+				<c:ajax event="blur" execute="@this" listener="#{pessoaBean.pesquisaCep}"/>
+			</h:inputText>
+			
 			<h:outputLabel value="Ativo: "/>
 			<h:selectBooleanCheckbox value="#{pessoaBean.pessoa.ativo}"/>
 			

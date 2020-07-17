@@ -49,12 +49,14 @@ public class Pessoa implements Serializable {
 
 	private String tituloEleitor;
 
+	private String cep;
+
 	public Pessoa() {
 	}
 
 	public Pessoa(Long id, String nome, String sobrenome, Integer idade, Date dataNascimento, String sexo,
 			String[] frameworks, Boolean ativo, String login, String senha, String perfilUser, String nivelProgramador,
-			Integer[] linguagens, String cpf, String tituloEleitor) {
+			Integer[] linguagens, String cpf, String tituloEleitor, String cep) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -71,6 +73,7 @@ public class Pessoa implements Serializable {
 		this.linguagens = linguagens;
 		this.cpf = cpf;
 		this.tituloEleitor = tituloEleitor;
+		this.cep = cep;
 	}
 
 	public Long getId() {
@@ -176,8 +179,6 @@ public class Pessoa implements Serializable {
 	public void setLinguagens(Integer[] linguagens) {
 		this.linguagens = linguagens;
 	}
-	
-	
 
 	public String getCpf() {
 		return cpf;
@@ -193,6 +194,14 @@ public class Pessoa implements Serializable {
 
 	public void setTituloEleitor(String tituloEleitor) {
 		this.tituloEleitor = tituloEleitor;
+	}
+
+	public String getCep() {
+		return cep;
+	}
+
+	public void setCep(String cep) {
+		this.cep = cep;
 	}
 
 	@Override
@@ -226,9 +235,8 @@ public class Pessoa implements Serializable {
 				+ ", dataNascimento=" + dataNascimento + ", sexo=" + sexo + ", frameworks="
 				+ Arrays.toString(frameworks) + ", ativo=" + ativo + ", login=" + login + ", senha=" + senha
 				+ ", perfilUser=" + perfilUser + ", nivelProgramador=" + nivelProgramador + ", linguagens="
-				+ Arrays.toString(linguagens) + ", cpf=" + cpf + ", tituloEleitor=" + tituloEleitor + "]";
+				+ Arrays.toString(linguagens) + ", cpf=" + cpf + ", tituloEleitor=" + tituloEleitor + ", cep=" + cep
+				+ "]";
 	}
-
-	
 
 }
