@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:c="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 <h:head>
 	<title>Cadastro de usuário</title>
 </h:head>
@@ -11,7 +12,6 @@
 <h:body>
 
 	<ui:include src="/menu.xhtml"/>
-
 
 	<h:form id="formPessoa">
 				
@@ -27,7 +27,7 @@
 			<h:inputText value="#{pessoaBean.pessoa.id}" readonly="true" rendered="false"/>
 
 			<h:outputLabel value="Nome: " />
-			<h:inputText value="#{pessoaBean.pessoa.nome}" 
+			<h:inputText pt:placeholder="Informe o nome do usuário" value="#{pessoaBean.pessoa.nome}" 
 			required="true" 
 			requiredMessage="Informe nome do usuário"			
 			validatorMessage="Nome tem que ter no mínimo 3 letras">
@@ -35,19 +35,19 @@
 			</h:inputText>
 
 			<h:outputLabel value="Sobrenome: " />
-			<h:inputText value="#{pessoaBean.pessoa.sobrenome}" />
+			<h:inputText pt:placeholder="Informe seu sobrenome" value="#{pessoaBean.pessoa.sobrenome}" />
 
 			<h:outputLabel value="Idade: " />
-			<h:inputText value="#{pessoaBean.pessoa.idade}" />
+			<h:inputText pt:placeholder="Informe sua idade" value="#{pessoaBean.pessoa.idade}" />
 			
 			<h:outputLabel value="Cpf:"/>
-			<h:inputText value="#{pessoaBean.pessoa.cpf}" required="true" requiredMessage="CPF invalido"
+			<h:inputText pt:placeholder="CPF(Apenas números)" value="#{pessoaBean.pessoa.cpf}" required="true" requiredMessage="CPF invalido"
 				validatorMessage="CPF deve conter 11 numeros">
 				<c:validateLength maximum="11"/>				
 			</h:inputText>
 			
 			<h:outputLabel value="Titulo de eleitor:"/>
-			<h:inputText value="#{pessoaBean.pessoa.tituloEleitor}" required="true" requiredMessage="Informe o titulo de eleitor"/>								
+			<h:inputText pt:placeholder="Título(Apenas números)" value="#{pessoaBean.pessoa.tituloEleitor}" required="true" requiredMessage="Informe o titulo de eleitor"/>								
 						
 			<h:outputLabel value="Sexo: "/>
 			<h:selectOneMenu id="campoSexo" value="#{pessoaBean.pessoa.sexo}">
@@ -72,7 +72,7 @@
 			</h:selectManyMenu>
 			
 			<h:outputLabel value="CEP:"/>
-			<h:inputText value="#{pessoaBean.pessoa.cep}">
+			<h:inputText pt:placeholder="CEP(Apenas números)" value="#{pessoaBean.pessoa.cep}">
 				<c:ajax event="blur" execute="@this" listener="#{pessoaBean.pesquisaCep}" 
 				render="logradouro complemento bairro localidade uf unidade ibge gia"/>
 			</h:inputText>
