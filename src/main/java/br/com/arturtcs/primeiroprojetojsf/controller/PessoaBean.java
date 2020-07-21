@@ -15,6 +15,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
+import javax.servlet.http.HttpServletRequest;
 
 import com.google.gson.Gson;
 
@@ -82,6 +83,19 @@ public class PessoaBean {
 		return "index.jsf";
 	}
 
+	public String logout() {
+		FacesContext context = FacesContext.getCurrentInstance();
+		ExternalContext externalContext = context.getExternalContext();
+		externalContext.getSessionMap().remove("usuarioLogado");
+
+		HttpServletRequest httpServletRequest = (HttpServletRequest) context.getCurrentInstance().getExternalContext()
+				.getRequest();
+		
+		httpServletRequest.getSession().invalidate();
+
+		return "index.jsf";
+	}
+
 	public boolean permiteAcesso(String acesso) {
 		FacesContext context = FacesContext.getCurrentInstance();
 		ExternalContext external = context.getExternalContext();
@@ -106,7 +120,7 @@ public class PessoaBean {
 			}
 
 			Pessoa gsonAux = new Gson().fromJson(jsonCep.toString(), Pessoa.class);
-			
+
 			pessoa.setCep(gsonAux.getCep());
 			pessoa.setLogradouro(gsonAux.getLogradouro());
 			pessoa.setComplemento(gsonAux.getComplemento());
@@ -116,7 +130,6 @@ public class PessoaBean {
 			pessoa.setUnidade(gsonAux.getUnidade());
 			pessoa.setIbge(gsonAux.getIbge());
 			pessoa.setGia(gsonAux.getGia());
-
 
 		} catch (Exception e) {
 			e.printStackTrace();
