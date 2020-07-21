@@ -73,8 +73,33 @@
 			
 			<h:outputLabel value="CEP:"/>
 			<h:inputText value="#{pessoaBean.pessoa.cep}">
-				<c:ajax event="blur" execute="@this" listener="#{pessoaBean.pesquisaCep}"/>
+				<c:ajax event="blur" execute="@this" listener="#{pessoaBean.pesquisaCep}" 
+				render="logradouro complemento bairro localidade uf unidade ibge gia"/>
 			</h:inputText>
+			
+			<h:outputLabel value="Logradouro:"/>
+			<h:inputText value="#{pessoaBean.pessoa.logradouro}" id="logradouro" readonly="true"/>
+			
+			<h:outputLabel value="Complemento:"/>
+			<h:inputText value="#{pessoaBean.pessoa.complemento}" id="complemento" readonly="true"/>
+			
+			<h:outputLabel value="Bairro:"/>
+			<h:inputText value="#{pessoaBean.pessoa.bairro}" id="bairro" readonly="true"/>
+			
+			<h:outputLabel value="Localidade:"/>
+			<h:inputText value="#{pessoaBean.pessoa.localidade}" id="localidade" readonly="true"/>
+			
+			<h:outputLabel value="UF:"/>
+			<h:inputText value="#{pessoaBean.pessoa.uf}" id="uf" readonly="true"/>
+			
+			<h:outputLabel value="Unidade:"/>
+			<h:inputText value="#{pessoaBean.pessoa.unidade}" id="unidade" readonly="true"/>
+			
+			<h:outputLabel value="IBGE:"/>
+			<h:inputText value="#{pessoaBean.pessoa.ibge}" id="ibge" readonly="true"/>
+			
+			<h:outputLabel value="GIA:"/>
+			<h:inputText value="#{pessoaBean.pessoa.gia}" id="gia" readonly="true"/>
 			
 			<h:outputLabel value="Ativo: "/>
 			<h:selectBooleanCheckbox value="#{pessoaBean.pessoa.ativo}"/>
