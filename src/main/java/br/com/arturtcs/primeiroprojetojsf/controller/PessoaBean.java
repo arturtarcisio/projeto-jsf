@@ -138,6 +138,13 @@ public class PessoaBean {
 			mostrarMsg("Erro ao consultar o cep");
 		}
 	}
+	
+	public void carregaCidades(AjaxBehaviorEvent event) {
+		String codigoEstado = (String) event.getComponent().getAttributes().get("submittedValue");
+		if(codigoEstado != null) {
+			System.out.println(codigoEstado);
+		}
+	}
 
 	/*
 	 * Sempre quando abrir a tela que o managed bean for instanciado, após ser
