@@ -9,7 +9,9 @@
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 
 		<class>br.com.arturtcs.primeiroprojetojsf.entidades.Pessoa</class>
-		<class>br.com.arturtcs.primeiroprojetojsf.entidades.Lancamento</class>		
+		<class>br.com.arturtcs.primeiroprojetojsf.entidades.Lancamento</class>
+		<class>br.com.arturtcs.primeiroprojetojsf.entidades.Estados</class>
+		<class>br.com.arturtcs.primeiroprojetojsf.entidades.Cidades</class>		
 		
 		<properties>
 			<!-- Dados de conexão com o banco -->
