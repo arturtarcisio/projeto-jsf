@@ -134,6 +134,11 @@
 				<c:selectItem itemValue="4" itemLabel="C#"/>
 				<c:selectItem itemValue="5" itemLabel="Cobol"/>
 			</h:selectManyCheckbox>	
+			
+			<h:outputLabel value="Estados:"/>
+			<h:selectOneMenu value="#{pessoaBean.pessoa.estados}">
+				<c:selectItems value="#{pessoaBean.estados}" />
+			</h:selectOneMenu>
 				
 				
 		<h:outputLabel/>
@@ -144,8 +149,10 @@
 			</h:commandButton>
 			<h:commandButton value="Salvar" action="#{pessoaBean.salvar}" image="/resources/img/salvar.png"
 			style="height: 50px; width:50px; margin-left:1cm;" title="Salvar"/>
+			
 			<h:commandButton value="Apagar" action="#{pessoaBean.remove}" image="/resources/img/deletar.png"
 			style="height: 50px; width:50px; margin-left:1cm;" title="Apagar" rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}"/>
+			
 			<h:commandButton value="Limpar" id="botaoLimpar" action="#{pessoaBean.limpar}" image="/resources/img/limpar.png"
 			style="height: 50px; width:50px; margin-left:1cm;" title="Limpar">
 				<c:ajax execute="botaoLimpar" render="@form"/>

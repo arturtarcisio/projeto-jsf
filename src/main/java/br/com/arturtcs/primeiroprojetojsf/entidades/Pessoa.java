@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 @Entity
 public class Pessoa implements Serializable {
@@ -66,6 +67,9 @@ public class Pessoa implements Serializable {
 	private String ibge;
 
 	private String gia;
+
+	@Transient // nao persiste no banco. Apenas para ajudar a programar
+	private Estados estados;
 
 	public Pessoa() {
 	}
@@ -291,6 +295,14 @@ public class Pessoa implements Serializable {
 
 	public void setGia(String gia) {
 		this.gia = gia;
+	}
+
+	public Estados getEstados() {
+		return estados;
+	}
+
+	public void setEstados(Estados estados) {
+		this.estados = estados;
 	}
 
 	@Override

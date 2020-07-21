@@ -15,6 +15,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
+import javax.faces.model.SelectItem;
 import javax.servlet.http.HttpServletRequest;
 
 import com.google.gson.Gson;
@@ -33,6 +34,7 @@ public class PessoaBean {
 	private DaoGeneric<Pessoa> dao = new DaoGeneric<Pessoa>();
 	private List<Pessoa> listaDePessoas = new ArrayList<Pessoa>();
 	private InterfaceDaoPessoa iDaoPessoa = new DaoPessoaImpl();
+	private List<SelectItem> estados;
 
 	public String salvar() {
 		pessoa = dao.merge(pessoa);
@@ -162,5 +164,16 @@ public class PessoaBean {
 	public void setListaDePessoas(List<Pessoa> listaDePessoas) {
 		this.listaDePessoas = listaDePessoas;
 	}
+
+	public List<SelectItem> getEstados() {
+		estados = iDaoPessoa.listaEstados();
+		return estados;
+	}
+
+	public void setEstados(List<SelectItem> estados) {
+		this.estados = estados;
+	}
+	
+	
 
 }
