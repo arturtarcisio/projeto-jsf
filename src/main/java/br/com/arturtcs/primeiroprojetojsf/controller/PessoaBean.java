@@ -21,9 +21,12 @@ import javax.servlet.http.HttpServletRequest;
 import com.google.gson.Gson;
 
 import br.com.arturtcs.primeiroprojetojsf.dao.DaoGeneric;
+import br.com.arturtcs.primeiroprojetojsf.entidades.Cidades;
+import br.com.arturtcs.primeiroprojetojsf.entidades.Estados;
 import br.com.arturtcs.primeiroprojetojsf.entidades.Pessoa;
 import br.com.arturtcs.primeiroprojetojsf.repositories.InterfaceDaoPessoa;
 import br.com.arturtcs.primeiroprojetojsf.repositories.impl.DaoPessoaImpl;
+import br.com.arturtcs.primeiroprojetojsf.utils.JPAUtil;
 
 //Controller
 @ManagedBean(name = "pessoaBean")
@@ -35,6 +38,7 @@ public class PessoaBean {
 	private List<Pessoa> listaDePessoas = new ArrayList<Pessoa>();
 	private InterfaceDaoPessoa iDaoPessoa = new DaoPessoaImpl();
 	private List<SelectItem> estados;
+	private List<SelectItem> cidades;
 
 	public String salvar() {
 		pessoa = dao.merge(pessoa);
@@ -92,7 +96,7 @@ public class PessoaBean {
 
 		HttpServletRequest httpServletRequest = (HttpServletRequest) context.getCurrentInstance().getExternalContext()
 				.getRequest();
-		
+
 		httpServletRequest.getSession().invalidate();
 
 		return "index.jsf";
@@ -138,11 +142,23 @@ public class PessoaBean {
 			mostrarMsg("Erro ao consultar o cep");
 		}
 	}
-	
+
 	public void carregaCidades(AjaxBehaviorEvent event) {
 		String codigoEstado = (String) event.getComponent().getAttributes().get("submittedValue");
-		if(codigoEstado != null) {
-			System.out.println(codigoEstado);
+		if (codigoEstado != null) {
+			Estados estado = JPAUtil.getEntityManager().find(Estados.class, Long.parseLong(codigoEstado));
+			if (estado != null) {
+				pessoa.setEstados(estado);
+				List<Cidades> cidades = JPAUtil.getEntityManager()
+						.createQuery("from Cidades where estados.id = " + codigoEstado).getResultList();
+				List<SelectItem> selectItemsCidade = new ArrayList<SelectItem>();
+
+				for (Cidades cidade : cidades) {
+					selectItemsCidade.add(new SelectItem(cidade.getId(), cidade.getNome()));
+				}
+
+				setCidades(selectItemsCidade);
+			}
 		}
 	}
 
@@ -180,7 +196,13 @@ public class PessoaBean {
 	public void setEstados(List<SelectItem> estados) {
 		this.estados = estados;
 	}
-	
-	
+
+	public List<SelectItem> getCidades() {
+		return cidades;
+	}
+
+	public void setCidades(List<SelectItem> cidades) {
+		this.cidades = cidades;
+	}
 
 }
