@@ -12,7 +12,7 @@ import javax.persistence.EntityTransaction;
 import br.com.arturtcs.primeiroprojetojsf.entidades.Estados;
 import br.com.arturtcs.primeiroprojetojsf.utils.JPAUtil;
 
-@FacesConverter(forClass = Estados.class)
+@FacesConverter(forClass = Estados.class, value = "estadoConverter")
 public class EstadoConverter implements Converter, Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -32,7 +32,14 @@ public class EstadoConverter implements Converter, Serializable {
 	//Retorna apenas o código em String
 	@Override
 	public String getAsString(FacesContext context, UIComponent component, Object estado) {
-		return ((Estados) estado).getId().toString();
+		if(estado == null) {
+			return null;
+		} else if (estado instanceof Estados) {
+			return ((Estados) estado).getId().toString();
+		} else {
+			return estado.toString();
+		}
+		
 	}
 	
 	

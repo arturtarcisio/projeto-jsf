@@ -44,7 +44,7 @@ public class DaoPessoaImpl implements InterfaceDaoPessoa {
 		List<Estados> estados = em.createQuery("from Estados").getResultList();
 
 		for (Estados estado : estados) {
-			selectItems.add(new SelectItem(estado.getId(), estado.getNome()));
+			selectItems.add(new SelectItem(estado, estado.getNome()));
 		}
 
 		return selectItems;

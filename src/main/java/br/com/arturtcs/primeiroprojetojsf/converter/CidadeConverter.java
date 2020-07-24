@@ -12,8 +12,8 @@ import javax.persistence.EntityTransaction;
 import br.com.arturtcs.primeiroprojetojsf.entidades.Cidades;
 import br.com.arturtcs.primeiroprojetojsf.utils.JPAUtil;
 
-@FacesConverter(forClass = Cidades.class)
-public class CidadeConverter implements Converter, Serializable{
+@FacesConverter(forClass = Cidades.class, value = "cidadeConverter")
+public class CidadeConverter implements Converter, Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -22,16 +22,21 @@ public class CidadeConverter implements Converter, Serializable{
 		EntityManager em = JPAUtil.getEntityManager();
 		EntityTransaction transaction = em.getTransaction();
 		transaction.begin();
-		
+
 		Cidades cidades = (Cidades) em.find(Cidades.class, Long.parseLong(codigoCidade));
-		
+
 		return cidades;
 	}
 
 	@Override
 	public String getAsString(FacesContext context, UIComponent component, Object cidade) {
-		return ((Cidades) cidade).getId().toString();
+		if (cidade == null) {
+			return null;
+		} else if (cidade instanceof Cidades) {
+			return ((Cidades) cidade).getId().toString();
+		} else {
+			return cidade.toString();
+		}
 	}
 
-	
 }
