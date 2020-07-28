@@ -223,21 +223,17 @@
 			</h:column>
 			<h:column>
 				<c:facet name="header">Editar</c:facet>
-				<h:commandLink title="Editar">
-					<c:setPropertyActionListener value="#{pessoa}"
-						target="#{pessoaBean.pessoa}" />
-					<h:graphicImage height="30" width="70" library="img"
-						name="editar.png" title="Editar" />
+				<h:commandLink title="Editar" immediate="true" action="#{pessoaBean.editar}">
+					<c:setPropertyActionListener value="#{pessoa}" target="#{pessoaBean.pessoa}" />
+					<h:graphicImage height="30" width="70" library="img" name="editar.png" title="Editar" />
 				</h:commandLink>
 			</h:column>
 
 			<h:column rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}">
 				<c:facet name="header">Excluir</c:facet>
-				<h:commandLink action="#{pessoaBean.remove}">
-					<c:setPropertyActionListener value="#{pessoa}"
-						target="#{pessoaBean.pessoa}" />
-					<h:graphicImage height="30" width="40" library="img"
-						name="excluir.png" title="Excluir" />
+				<h:commandLink title="Excluir" action="#{pessoaBean.remove}">
+					<c:setPropertyActionListener value="#{pessoa}" target="#{pessoaBean.pessoa}" />
+					<h:graphicImage height="30" width="40" library="img" name="excluir.png" title="Excluir" />
 				</h:commandLink>
 			</h:column>
 

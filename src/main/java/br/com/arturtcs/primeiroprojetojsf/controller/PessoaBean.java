@@ -160,6 +160,23 @@ public class PessoaBean {
 			setCidades(selectItemsCidade);
 		}
 	}
+	
+	public void editar() {
+		if (pessoa.getCidades() != null) {
+			Estados estado = pessoa.getCidades().getEstado();
+			pessoa.setEstados(estado);
+			
+			List<Cidades> cidades = JPAUtil.getEntityManager()
+					.createQuery("from Cidades where estado_id = " + estado.getId()).getResultList();
+			List<SelectItem> selectItemsCidade = new ArrayList<SelectItem>();
+
+			for (Cidades cidade : cidades) {
+				selectItemsCidade.add(new SelectItem(cidade, cidade.getNome()));
+			}
+
+			setCidades(selectItemsCidade);
+		}
+	}
 
 	/*
 	 * Sempre quando abrir a tela que o managed bean for instanciado, após ser
