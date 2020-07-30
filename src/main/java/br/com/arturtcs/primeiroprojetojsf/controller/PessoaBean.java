@@ -1,6 +1,9 @@
 package br.com.arturtcs.primeiroprojetojsf.controller;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
@@ -181,6 +184,30 @@ public class PessoaBean {
 
 			setCidades(selectItemsCidade);
 		}
+	}
+	
+	//Metodo converte um inputStream para array de byte
+	private byte[] getByte(InputStream is) throws IOException{
+	
+		int len;
+		int size = 1024;
+		byte[] buf = null;
+		if(is instanceof ByteArrayInputStream) {
+			size = is.available();
+			buf = new byte[size];
+			len = is.read(buf, 0, size);
+		} else {
+			ByteArrayOutputStream bos = new ByteArrayOutputStream();
+			buf = new byte[size];
+			
+			while((len = is.read(buf, 0, size)) != -1) {
+				bos.write(buf, 0, len);
+			}
+			
+			buf = bos.toByteArray();
+		}
+		
+		return buf;
 	}
 
 	/*
