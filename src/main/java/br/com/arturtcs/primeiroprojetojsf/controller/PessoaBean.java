@@ -18,6 +18,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.model.SelectItem;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.Part;
 
 import com.google.gson.Gson;
 
@@ -40,8 +41,12 @@ public class PessoaBean {
 	private InterfaceDaoPessoa iDaoPessoa = new DaoPessoaImpl();
 	private List<SelectItem> estados;
 	private List<SelectItem> cidades;
+	private Part arquivoFoto;
 
 	public String salvar() {
+		
+		System.out.println(arquivoFoto);
+		
 		pessoa = dao.merge(pessoa);
 		pessoa = new Pessoa();
 		carregarListaDePessoas();
@@ -220,5 +225,15 @@ public class PessoaBean {
 	public void setCidades(List<SelectItem> cidades) {
 		this.cidades = cidades;
 	}
+
+	public Part getArquivoFoto() {
+		return arquivoFoto;
+	}
+
+	public void setArquivoFoto(Part arquivoFoto) {
+		this.arquivoFoto = arquivoFoto;
+	}
+	
+	
 
 }

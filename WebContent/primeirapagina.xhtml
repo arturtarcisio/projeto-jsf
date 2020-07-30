@@ -13,7 +13,7 @@
 
 	<ui:include src="/menu.xhtml" />
 
-	<h:form id="formPessoa">
+	<h:form id="formPessoa" enctype="multipart/form-data">
 
 		<h:messages infoStyle="color:black; background:#6495ED" />
 
@@ -26,6 +26,11 @@
 			<h:outputLabel value="Id: " rendered="false" />
 			<h:inputText value="#{pessoaBean.pessoa.id}" readonly="true"
 				rendered="false" />
+				
+			<h:outputLabel value="Foto:"/>
+			<h:inputFile id="foto" value="#{pessoaBean.arquivoFoto}">
+			
+			</h:inputFile>
 
 			<h:outputLabel value="Nome: " />
 			<h:inputText pt:placeholder="Informe o nome do usuário"
