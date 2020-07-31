@@ -25,6 +25,24 @@
 			<property name="hibernate.show_sql" value="true"/>
 			<property name="hibernate.format_sql" value="true" />
 			
+			
+			<!-- CONFIGURACOES DO C3P0 -->
+			
+			<!-- minimo de conexoes ou portas disponoveis -->
+			<property name="hibernate.c3p0.min_size" value="5"/>
+			
+			<!-- máximo de conexões ou portas disponiveis -->
+			<property name="hibernate.c3p0.max_sizer" value="100"/>
+			
+			<!-- numero de segundos em que uma conexao inativa é mantida no pool -->
+			<property name="hibernate.c3p0.timeout" value="300"/>
+			
+			<!-- numero total de transações no banco mantida em cache -->
+			<property name="hibernate.c3p0.max_statements" value="50"/>
+			
+			<!-- tempo ocioso em segundos antes de uma conexao ser validada automaticamente -->
+			<property name="hibernate.c3p0.idle_test_period" value="120"/>
+			
 		</properties>
 		
 		
