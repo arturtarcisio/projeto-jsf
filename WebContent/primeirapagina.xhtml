@@ -219,6 +219,13 @@
 				<h:outputText value="#{pessoa.sobrenome}" />
 			</h:column>
 			<h:column>
+				<c:facet name="header">Foto:</c:facet>
+				<h:comandLink actionListener="#{pessoaBean.download}">
+					<h:graphicImage width="60" height="60" value="#{pessoa.fotoIconBase64}"/>
+					<f:param name="fileDownloadId" value="#{pessoa.id}"/>
+				</h:comandLink>
+			</h:column>
+			<h:column>
 				<c:facet name="header">Idade</c:facet>
 				<h:outputText value="#{pessoa.idade}" />
 			</h:column>
