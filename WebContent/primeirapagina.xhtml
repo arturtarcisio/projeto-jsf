@@ -163,7 +163,7 @@
 			<h:outputLabel value="Estados:" />
 			<h:selectOneMenu value="#{pessoaBean.pessoa.estados}" immediate="true" id="comboEstados"
 				converter="estadoConverter">
-				<c:selectItem itemLabel="--[Selecione]--" noSelectionOption="true" />
+				<c:selectItem itemLabel="[--Selecione--]" noSelectionOption="true" />
 				<c:selectItems value="#{pessoaBean.estados}"/>
 				<c:ajax event="change" execute="@this" render="comboCidade" listener="#{pessoaBean.carregaCidades}"/>
 			</h:selectOneMenu>
